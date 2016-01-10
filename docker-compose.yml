@@ -33,6 +33,9 @@ graphdb:
 rabbit:
   container_name: rabbit
   image: rabbitmq:3
+  ports:
+   - "5672:5672"
+   - "15672:15672"
 twitter-rank-web:
   container_name: dashboard
   image: kbastani/twitter-rank-web:latest
@@ -54,10 +57,10 @@ twitter-rank-crawler:
    - rabbit
    - graphdb
   environment:
-    SPRING_SOCIAL_TWITTER_ACCESSTOKENSECRET: "REPLACE"
-    SPRING_SOCIAL_TWITTER_ACCESSTOKEN: "REPLACE"
-    SPRING_SOCIAL_TWITTER_APPSECRET: "REPLACE"
-    SPRING_SOCIAL_TWITTER_APPID: "REPLACE"
+    SPRING_SOCIAL_TWITTER_ACCESSTOKENSECRET: "yM6EZM5eu05YkJuI8Sm2wNSsAmir4dfMrhqZlQuKiXV77"
+    SPRING_SOCIAL_TWITTER_ACCESSTOKEN: "99625043-9Qnv1Hj51rxvjJjf4cJQ5HCnskkl7cIV0HBBE6yCL"
+    SPRING_SOCIAL_TWITTER_APPSECRET: "cYFJ7B8yDMJm0cd22nYutnb3t0BtPyMVHmyFrbIbrntgdUGzEg"
+    SPRING_SOCIAL_TWITTER_APPID: "tEckNvO7vz0j4s5tjSDhdR1Eo"
     SPRING_PROFILES_ACTIVE: "production"
 scope:
   container_name: weave-scope
