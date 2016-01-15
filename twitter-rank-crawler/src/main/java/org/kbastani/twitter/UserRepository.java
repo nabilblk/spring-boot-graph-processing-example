@@ -4,6 +4,7 @@ import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -32,6 +33,13 @@ public interface UserRepository extends GraphRepository<User> {
             "LIMIT {limit}\n" +
             "RETURN user")
     Set<User> findRankedUsers(@Param("skip") Integer skip, @Param("limit") Integer limit);
+
+    @Query("MATCH (user:User) WHERE has(user.pagerank) AND has(user.screenName) AND user.screenName IN {screensName}\n" +
+            "WITH user\n" +
+            "ORDER BY user.pagerank DESC\n" +
+            "LIMIT {limit}\n" +
+            "RETURN user")
+    Set<User> findRankedUserByProfiles(@Param("limit") Integer limit,@Param("screensName") List<String> screensName);
 
     @Query("MATCH (a:User)<-[r:FOLLOWS]-(b)\n" +
             "WHERE NOT has(a.screenName)\n" +
